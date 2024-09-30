@@ -60,7 +60,7 @@ Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https:/
 
 Once deployment is complete, you may power it on. 
 
-You may now connect to the ZVM in your web browser at ht<span>tps://</span>ZVM-IP to verify it was deployed correctly. The port :9669 is no longer needed.
+You may now connect to the ZVM in your web browser at - ht<span>tps://</span>ZVM-IP - to verify it was deployed correctly. The port :9669 is no longer needed.
 
 
 
