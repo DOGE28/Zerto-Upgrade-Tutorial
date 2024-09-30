@@ -1,33 +1,57 @@
 # Zerto ZVM Upgrade Documentation and Tutorial
 
 This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the newest Linux ZVM appliance.
-The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 10.0 U2. Zerto requires there be at most a two version gap when upgrading.
+The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 10.0 U2. Zerto requires there be at most a two version gap when upgrading. Please upgrade your existing Windows ZVM to this version before continuing.
 
 > [!IMPORTANT]
 > Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process
+
+> [!CAUTION]
+> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different hypervisor, this upgrade path WILL NOT be possible for you. Additional platforms will be supported in future releases.
 
 ## Pre-Migration
 
 Before we begin, there are a few considerations we must take into account.
 
-* This is a full migration from Windows to Linux. The Windows ZVM can be decommissioned once the migration has completed.
+* This is a full migration from Windows to Linux, and is achieved through the use of a migration tool that Zerto provides. The Windows ZVM can be decommissioned once the migration has been completed and verified.
 * If your ZVM currently uses an external database you will need to ensure the Linux appliance can connect to it before beginning the migration. (Steps to verify are included here)
-* There will be a total of three IPs needed as part of this migration: the Windows ZVM, the Linux ZVM, and a floater used during the migration.
+* There will be a total of three IPs needed as part of this migration. These must be in the same subnet and allow interconnectivity between them all.
 
 ### External Database Connection
 
 If your ZVM does not use an external database, you may skip to the next section.
 
-If your ZVM does use an external database, you will need to log into your database as an administrator and ensure there is a local System Administrator (SA) account and take note of its credentials.
+If your ZVM does use an external database, you will need to log into your database as an administrator and ensure there is a local account with the System Administrator (SA) role and take note of its credentials.
 
 You will then go into your current Windows ZVM, then using the search bar near the start icon look for "Zerto Diagnostic Tool". Start this, then look for the "Change SQL Server Credentials" option.
 
 > [!Note]
-> The diagnostic tool can also be found at: `C:\Program Files\Zerto\Zerto Virtual Replication\Diagnostics\ ZertoDiagnostics.exe.`
+> The diagnostic tool can also be found at: `C:\Program Files\Zerto\Zerto Virtual Replication\Diagnostics\ ZertoDiagnostics.exe`
 
 ![alt text](image-1.png)
 
-Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. once verified, you may move on to the next step.
+Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step.
+
+### IP Addresses
+
+You will need a total of three IPs to perform the migration; the IP currently being used by the Windows ZVM, one for the Linux ZVM, and a floater used during the migration.
+
+These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to make sure that the IPs we wanted to use were not being used by another device before commiting to using them. 
+
+>[!TIP]
+> If you already have the Linux ZVM set up, you can run a `ping` command to ensure connectivity to the Windows ZVM.
+
+Keep the IPs you've found somewhere close by as they'll be used shortly.
+
+During the migration, the Linux ZVM will steal the Windows IP, then the Windows ZVM will be given the floater IP. The original Linux ZVM IP will no longer be used immediately after migration.
+
+### Linux ZVM Setup
+
+
+
+
+
+
 
 
 
