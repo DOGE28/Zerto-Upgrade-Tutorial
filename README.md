@@ -70,6 +70,9 @@ The ZVM comes with a preconfigured user specifically for the ZVM:
 
 You will be asked to change the default password when you first log in.
 
+>[!TIP]
+> If you are unable to reach the ZVM in the web browser, you will need to configure your networks settings. Whether you can connect or not, you will want to double check your network settings before performing the migration by using number 1 in the below menu.
+
 The VM comes with a preconfigured Linux user:
 
 * Linux User/Password (Used for SSH)
@@ -96,9 +99,32 @@ Your Linux ZVM appliance is now ready for migration.
 >[!TIP]
 > It is highly suggested to also setup authentication through Keycloak at this point, but is not required. See the [Authentication](#Authentication) section for additional information.
 
+## Migration Tool
 
+>[!IMPORTANT]
+> This is the point at which you will want to take snapshots of both the Windows and Linux ZVMs. We HIGHLY RECOMMEND taking snapshots! There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and convenient.
 
+You will want to download the [Zerto Migration Tool](https://www.zerto.com/myzerto/support/downloads/) onto the Windows ZVM. **Take care to choose the migration tool for the 10.0 U2 version!**
 
+Once downloaded, open the .exe and click on the "Read me" link that will open up the Zerto documentation. Once the page is launched, you can proceed to the next screen.
+
+Enter the Linux ZVM IP address, username, and password. Then validate SSH connectivity. Once validated, proceed to the next screen.
+
+![alt text](image-3.png)
+
+Next, you will need the network information for the floater IP address. Fill in the information and proceed.
+
+![alt text](image-4.png)
+
+Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the informaiton you've entered before migrating. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update them.
+
+![alt text](image-5.png)
+
+Return to the ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to return to full functionality, so give it some time. Also make sure to check on the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them.
+
+## Post-Migration
+
+Now that you are migrated to the Linux ZVM, we need to upgrade to a higher version.
 
 ### Authentication
 
