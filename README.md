@@ -62,7 +62,36 @@ Once deployment is complete, you may power it on.
 
 You may now connect to the ZVM in your web browser at  ht<span>tps://</span>ZVM-IP  to verify it was deployed correctly. The port :9669 is no longer needed.
 
+The ZVM comes with a preconfigured user specifically for the ZVM:
 
+* ZVM User/Password
+    - admin
+    - admin
+
+You will be asked to change the default password when you first log in.
+
+The VM comes with a preconfigured Linux user:
+
+* Linux User/Password (Used for SSH)
+    - zadmin
+    - Zertodata123!
+
+
+
+Open up a console in the VM and log in using the above credentials.
+You will be asked to change the password before proceeding.
+
+You will then be greeted by the appliance manager menu.
+
+![alt text](image-2.png)
+
+You will want to enter number 2, then 2 again to configure a static IP. Fill out the necessary information and verify that it can connect to the internet. You can do this by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly.
+
+You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
+
+Next, enter number 7 and enable SSH. You will want to confirm that SSH is working by using the `ssh zadmin@<ZVM-IP>` command and logging in. If you ever need to change the password for this account in the future, you may exit to shell and use the `passwd` command to change it.
+
+Your Linux ZVM appliance is now ready for migration.
 
 >[!TIP]
 > It is highly suggested to also setup authentication through Keycloak at this point, but is not required. See the [Authentication](#Authentication) section for additional information.
