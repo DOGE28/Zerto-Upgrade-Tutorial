@@ -7,7 +7,7 @@ The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 1
 > Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process
 
 > [!CAUTION]
-> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different hypervisor, this upgrade path WILL NOT be possible for you. Additional platforms will be supported in future releases.
+> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different hypervisor, this upgrade path WILL NOT be possible for you. Additional platforms will be supported in future migration tool releases.
 
 ## Pre-Migration
 
@@ -47,7 +47,31 @@ During the migration, the Linux ZVM will steal the Windows IP, then the Windows 
 
 ### Linux ZVM Setup
 
+The Linux ZVM appliance VM must be setup prior to using the migration tool. This includes the following:
 
+* Deploying the VM
+* Setting up networking
+* Making sure SSH is enabled
+
+Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://www.zerto.com/myzerto/support/downloads/) from the support site, and deploying it as any other VM.
+
+>[!WARNING]
+> We choose not to change any of the preconfigured settings when deploying the OVF. If you do change anything please know that you are deviating from this tutorial and Zerto support may be the only ones that can fix any potential issues. Consult the Zerto documentation for options that are safe to change.
+
+Once deployment is complete, you may power it on. 
+
+You may now connect to the ZVM in your web browser at \https://ZVM-IP\ to verify it was deployed correctly. The port :9669 is no longer needed.
+
+
+
+>[!TIP]
+> It is highly suggested to also setup authentication through Keycloak at this point, but is not required. See the [Authentication](#Authentication) section for additional information.
+
+
+
+
+
+### Authentication
 
 
 
