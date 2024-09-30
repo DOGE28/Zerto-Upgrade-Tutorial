@@ -161,7 +161,7 @@ The admin account should now be able to access the "Appliance Upgrade" tab in th
 
 
 ### Active Directory Integration
-> [!IMPORANT]
+> [!IMPORTANT]
 > This section will require you to have some understanding of how your Active Directory is laid out. LDAP can be confusing, so don't hesitate to reach out to someone at Tonaquint if necessary.
 
 You will need to have a few things prior to starting the integration process:
@@ -186,12 +186,12 @@ Below are the necessary steps to connect Keycloak to your AD server:
     - Edit mode: READ_ONLY
         - If this is a different value, it gives Keycloak permission to edit your AD users. Don't let it do this! Keep it READ_ONLY
     - Users DN: DC=example,DC=local
-        - This is all of the "DC's" of your AD server. Whatever DC's were on the end of the service bot's DN is what you'll put here.
+        - This is all of the "DC's" of your AD server. Whatever DC's were on the end of the service bot's DN is what you'll put here. (This is the simple way of doing it)
     - Search Scope: Subtree
     - Periodic full sync: ON
         - This will make it so Keycloak will scan for changes
     - Full sync period: 600
-        - This just means that every 10 minutes Keycloak will update users. Change this to whatever you want.
+        - Scan interval
     - Save
 4. Create LDAP Mappers
     - Click on the "Mappers" tab
@@ -204,8 +204,32 @@ Below are the necessary steps to connect Keycloak to your AD server:
     - Add groups-mapper mapper
         - Name: groups-mapper
         - Mapper-Type: group-ldap-mapper
-        - User Model Attribute Name: loginMethod
-        - Attribute Value: UserFederation
+        - LDAP Groups DN: DC=example,DC=local
+            - Same as the Users DN from before
+        - LDAP Filter: (CN=Your_Group)
+            - This is the common name of your group. It does not need the full name, just the first bit with the group name.
+            - If you want multiple groups, please use format: (|(group_1)(group_2)...)
+        - Mode: READ_ONLY
+        - User Groups Retrieve Strategy: LOAD_GROUPS_BY_MEMBER_ATTRIBUTE_RECURSIVELY
+        - Save
+5. Import users and groups into Keycloak
+    - Go back to the screen where you input connection information and go to mappers tab
+    - Click on the newly created "groups-mapper" mapper
+    - The top right action drop down, choose "Sync LDAP groups to Keycloak"
+        - It should say that a group or groups were imported
+6. Give permissions to groups/users
+    - Go to the Groups tab
+    - Click on the group you want to change permissions
+    - Under the "Role mapping" tab, assign a new role
+        - Filter by client and find the "ZertoRole_Admin" role and assign it to the group
+        - You can adjust what each group's permissions are by giving them different roles here
+    - The process to grant permissions is the same for users
+7. Change RBAC in management console
+    - Go to https<span>://ZVM-IP</span>/management, and input admin credentials
+    - Go to the "Security & RBAC" tab and change from "All Allowed" to "No Access"
+        - This will guarantee that only those with assigned roles can sign in
+
+Once these steps have been completed, you will want to test your credentials against the ZVM. If you can log in, then it worked! If it doesn't, you may need to double check the permissions of your service account you're using to connect to your AD server, the credentials you're using to test, or your group permissions within AD.
     
 
 ## Upgrading The ZVM
