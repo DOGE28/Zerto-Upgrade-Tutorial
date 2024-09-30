@@ -32,7 +32,7 @@ You will then go into your current Windows ZVM, then using the search bar near t
 
 ![alt text](image-1.png)
 
-Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step.
+Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step. If you cannot get this method to connect, you will need to revist the permissions associated with the SA account.
 
 ### IP Addresses
 
@@ -98,13 +98,13 @@ Next, enter number 7 and enable SSH. You will want to confirm that SSH is workin
 
 Your Linux ZVM appliance is now ready for migration.
 
->[!TIP]
+>[!NOTE]
 > It is highly suggested to also setup authentication through Keycloak at this point, but is not required. See the [Authentication](#Authentication) section for additional information.
 
 ## Migration Tool
 
 >[!IMPORTANT]
-> This is the point at which you will want to take snapshots of both the Windows and Linux ZVMs. We HIGHLY RECOMMEND taking snapshots! There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and convenient.
+> This is the point at which you will want to take snapshots of both the Windows and Linux ZVMs. We HIGHLY RECOMMEND taking snapshots! There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient.
 
 You will want to download the [Zerto Migration Tool](https://www.zerto.com/myzerto/support/downloads/) onto the Windows ZVM. **Take care to choose the migration tool for the 10.0 U2 version!**
 
@@ -118,7 +118,7 @@ Next, you will need the network information for the floater IP address. Fill in 
 
 ![alt text](image-4.png)
 
-Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the informaiton you've entered before migrating. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update them.
+Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the informaiton you've entered before migrating. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update them. The migration should take 10-20 minutes.
 
 ![alt text](image-5.png)
 
@@ -141,9 +141,11 @@ If you have simple access needs, i.e. you only have one or two individuals that 
 
 However, if you have a team of individuals that frequently access the ZVM, you may want to consider integrating your authentication system. This tutorial will provide instructions on how to integrate Active Directory, but you will need to consult the Zerto documentation if you have a different system.
 
+The next section, however, is necessary reading for any organization.
+
 ### Admin Permissions
 
-Before we go over AD integration, we must first ensure that the preconfigured Admin account has the right permissions to upgrade the ZVM. This does not always come included as part of the installation process. 
+Before we proceed, we must first ensure that the preconfigured Admin account has the right permissions to upgrade the ZVM. This does not always come included as part of the installation process. 
 
 Go to https<span>://ZVM-IP</span>/auth in your web browser and authenticate as the admin user. You will be required to change the password if you have not been to this page already.
 
