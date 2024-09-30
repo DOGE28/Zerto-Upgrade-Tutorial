@@ -22,9 +22,13 @@ If your ZVM does use an external database, you will need to log into your databa
 
 You will then go into your current Windows ZVM, then using the search bar near the start icon look for "Zerto Diagnostic Tool". Start this, then look for the "Change SQL Server Credentials" option.
 
-![alt text](image-1.png)
-
 > [!Note]
 > The diagnostic tool can also be found at: `C:\Program Files\Zerto\Zerto Virtual Replication\Diagnostics\ ZertoDiagnostics.exe.`
+
+![alt text](image-1.png)
+
+Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. once verified, you may move on to the next step.
+
+
 
 
