@@ -242,7 +242,7 @@ Below are the necessary steps to connect Keycloak to your AD server:
     - Go to the "Security & RBAC" tab and change from "All Allowed" to "No Access"
         - This will guarantee that only those with assigned roles can sign in
 
-Once these steps have been completed, you will want to test your credentials against the ZVM. If you can log in, then it worked! If it doesn't, you may need to double check the permissions of your service account you're using to connect to your AD server, the credentials you're using to test, or your group permissions within AD.
+Once these steps have been completed, you will want to test your credentials against the ZVM. If you can log in, then it worked! If it doesn't, you may need to double check the permissions of your service account you're using to connect to your AD server, the credentials you're using to test, the info you added from the above steps, or your group permissions within AD.
     
 
 ## Upgrading The ZVM
@@ -251,7 +251,7 @@ Once these steps have been completed, you will want to test your credentials aga
 > Before proceeding, please ensure you have a snapshot of the Linux ZVM. This will help in the event you upgraded too far, or something went wrong. If you upgrade farther than instructed and you do not have a snapshot, you will be required to redeploy a brand new ZVM and will have to manually create each VPG again.
 
 > [!IMPORTANT]
-> If you are here to upgrade and haven't been following along with the tutorial, please check the [Admin Permissions Section](#admin-permissions) and verify that you have set up your user roles correctly. The original admin user MUST have the correct permissions to upgrade the ZVM.
+> If you are here to upgrade and haven't been following along with the tutorial, please check the [Admin Permissions](#admin-permissions) section and verify that you have set up your user roles correctly. The original admin user MUST have the correct permissions to upgrade the ZVM.
 
 > [!CAUTION]
 > Unless you have been instructed to upgrade to a higher version, PLEASE DO NOT PROCEED. Failure to follow these instructions will lead to loss of ZVM replication and the need to roll back to a previous version.
@@ -265,6 +265,8 @@ This point is incredibly important, as this two-away versioning also applies to 
 With Tonaquint's permission, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
 
 You will see an upgrade button in the top right, click on it and you will see a list of available versions. Select the version that Tonaquint has asked you to upgrade to. You will want to ensure there is a Zerto "Z" next to the version you choose, then click "Upgrade". 
+
+![alt text](image-8.png)
 
 The ZVM will then begin the upgrade process. I will unauthenticate you from the management console multiple times. You can simply log back in to watch the progress of the upgrade.
 
