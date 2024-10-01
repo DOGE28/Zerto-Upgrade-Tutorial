@@ -21,24 +21,31 @@ Before we begin, there are a few considerations we must take into account.
 
 ### External Database Connection
 
-If your ZVM does not use an external database, you may skip to the next section.
+Because of the change from Windows to Linux, we are unable to use Windows authentication for the database connection. A direct connection will need to be established instead using a local account.
+
+To determine if your ZVM was configured with an external database, follow these steps:
+
+1. On your Windows ZVM, open the file `Program Files\Zerto\Zerto Virtual Replication\storage_properties.xml`
+
+2. If the value under **m_server** is similar to `\\.\pipe\LOCALDB#SHD79E11\tsql\query`, then you have an embedded database. You may skip to the next section.
+    - If the value is an FQDN or IP address, then your SQL database is externally hosted and you need to proceed with the next steps below.
 
 If your ZVM does use an external database, you will need to log into your database as an administrator and ensure there is a local account with the System Administrator (SA) role and take note of its credentials.
 
 You will then go into your current Windows ZVM, then using the search bar near the start icon look for "Zerto Diagnostic Tool". Start this, then look for the "Change SQL Server Credentials" option.
 
 > [!Note]
-> The diagnostic tool can also be found at: `C:\Program Files\Zerto\Zerto Virtual Replication\Diagnostics\ ZertoDiagnostics.exe`
+> The diagnostic tool can also be found at: `C:\Program Files\Zerto\Zerto Virtual Replication\Diagnostics\ZertoDiagnostics.exe`
 
 ![alt text](image-1.png)
 
-Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step. If you cannot get this method to connect, you will need to revist the permissions associated with the SA account.
+Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step. If you cannot get this method to connect, you will need to revist the permissions associated with the local SA account.
 
 ### IP Addresses
 
 You will need a total of three IPs to perform the migration; the IP currently being used by the Windows ZVM, one for the Linux ZVM, and a floater used during the migration.
 
-These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to make sure that the IPs we wanted to use were not being used by another device before commiting to using them. 
+These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to make sure that the IPs we wanted to use were not being used by another device before committing to using them. 
 
 >[!TIP]
 > If you already have the Linux ZVM set up, you can run a `ping` command to ensure connectivity to the Windows ZVM.
