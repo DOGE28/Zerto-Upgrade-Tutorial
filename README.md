@@ -1,9 +1,9 @@
 # Zerto ZVM Upgrade Documentation and Tutorial
 
-This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the newest Linux ZVM appliance.
-The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 10.0 U2. Zerto requires there be at most a two version gap when upgrading. Please upgrade your existing Windows ZVM to this version before continuing.
+This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance.
+The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 10.0 U2. Zerto requires there be at most a two version gap when upgrading. Please upgrade your existing Windows ZVM to version 9.7 U4 before continuing.
 
-If you are viewing this to upgrade your ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
+If you are viewing this to upgrade your current Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
 
 > [!IMPORTANT]
 > Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process
@@ -72,7 +72,7 @@ The ZVM comes with a preconfigured user specifically for the ZVM:
 
 You will be asked to change the default password when you first log in.
 
->[!TIP]
+>[!NOTE]
 > If you are unable to reach the ZVM in the web browser, you will need to configure your networks settings. Whether you can connect or not, you will want to double check your network settings before performing the migration by using number 1 in the below menu.
 
 The VM comes with a preconfigured Linux user:
@@ -118,7 +118,7 @@ Next, you will need the network information for the floater IP address. Fill in 
 
 ![alt text](image-4.png)
 
-Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the informaiton you've entered before migrating. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update them. The migration should take 10-20 minutes.
+Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the information you've entered before migrating. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update them. The migration should take 10-20 minutes.
 
 ![alt text](image-5.png)
 
@@ -137,7 +137,7 @@ Preconfigured Keycloak User/Password:
 
 You will be required to change the password here upon first log in.
 
-If you have simple access needs, i.e. you only have one or two individuals that need access, you can technically proceed without changing anything. The preconfigured account whose password you changed at the ZVM web page can be sufficient for some organizations.
+If you have simple access needs, i.e. you only have one or two individuals that need access, you can technically proceed with just the initial password change. The preconfigured account whose password you changed at the ZVM web page can be sufficient for some organizations.
 
 However, if you have a team of individuals that frequently access the ZVM, you may want to consider integrating your authentication system. This tutorial will provide instructions on how to integrate Active Directory, but you will need to consult the Zerto documentation if you have a different system.
 
