@@ -39,7 +39,7 @@ You will then go into your current Windows ZVM, then using the search bar near t
 
 ![alt text](image-1.png)
 
-Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step. If you cannot get this method to connect, you will need to revist the permissions associated with the local SA account.
+Follow the steps and make sure that your Windows ZVM can connect using the SA credentials. Once verified, you may move on to the next step. If you cannot get this method to connect, you will need to revist the permissions associated with the local SA account for your database.
 
 ### IP Addresses
 
@@ -80,7 +80,7 @@ The ZVM comes with a preconfigured user specifically for the ZVM:
 You will be asked to change the default password when you first log in.
 
 >[!NOTE]
-> If you are unable to reach the ZVM in the web browser, you will need to configure your networks settings. Whether you can connect or not, you will want to double check your network settings before performing the migration by using number 1 in the below menu.
+> If you are unable to reach the ZVM in the web browser, you will need to configure your network settings. Whether you can connect or not, you will want to double check your network settings before performing the migration by using number 1 in the below menu.
 
 The VM comes with a preconfigured Linux user:
 
@@ -101,17 +101,17 @@ You will want to enter number 2, then 2 again to configure a static IP. Fill out
 
 You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
 
-Next, enter number 7 and enable SSH. You will want to confirm that SSH is working by using the `ssh zadmin@<ZVM-IP>` command and logging in. If you ever need to change the password for this account in the future, you may exit to shell and use the `passwd` command to change it.
+Next, enter number 7 and enable SSH. You will want to confirm that SSH is working by using the `ssh zadmin@<ZVM-IP>` command and logging in from another computer (Like from the Windows ZVM to again verfiy connectivity). If you ever need to change the password for this account in the future, you may exit to shell and use the `passwd` command to change it.
 
 Your Linux ZVM appliance is now ready for migration.
 
 >[!NOTE]
-> It is highly suggested to also setup authentication through Keycloak at this point, but is not required. See the [Authentication](#Authentication) section for additional information.
+> It is highly suggested to also setup authentication through Keycloak at this point, but it is not required. See the [Authentication](#Authentication) section to see if your organization should leverage additional authentication methods.
 
 ## Migration Tool
 
 >[!IMPORTANT]
-> This is the point at which you will want to take snapshots of both the Windows and Linux ZVMs. We HIGHLY RECOMMEND taking snapshots! There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient.
+> This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient.
 
 You will want to download the [Zerto Migration Tool](https://www.zerto.com/myzerto/support/downloads/) onto the Windows ZVM. **Take care to choose the migration tool for the 10.0 U2 version!**
 
@@ -125,11 +125,11 @@ Next, you will need the network information for the floater IP address. Fill in 
 
 ![alt text](image-4.png)
 
-Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the information you've entered before migrating. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update them. The migration should take 10-20 minutes.
+Finally, you will be presented with a summary screen where you can verify all of the previous information you've entered. Please look over this and confirm the information you've entered before migrating. Once you begin the migration process there is no going back. You can also check the "Upgrade VRAs" box if you'd like, but in our experience we still had to manually update some of them. The migration should take around 20-30 minutes.
 
 ![alt text](image-5.png)
 
-Return to the ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to return to full functionality, so give it some time. Also make sure to check on the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them.
+Return to the ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to catch up, so don't worry if it's not immediately replicating. Also make sure to check on the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them.
 
 ## Authentication
 
@@ -144,15 +144,17 @@ Preconfigured Keycloak User/Password:
 
 You will be required to change the password here upon first log in.
 
-If you have simple access needs, i.e. you only have one or two individuals that need access, you can technically proceed with just the initial password change. The preconfigured account whose password you changed at the ZVM web page can be sufficient for some organizations.
+If you have simple access needs, i.e. you only have one or two individuals that need access, you can technically proceed with just the initial password change. The preconfigured account whose password you changed to access Keycloak can be sufficient for some organizations.
 
-However, if you have a team of individuals that frequently access the ZVM, you may want to consider integrating your authentication system. This tutorial will provide instructions on how to integrate Active Directory, but you will need to consult the Zerto documentation if you have a different system.
+Our recommendation is that anyone that needs access should have their own user defined in Keycloak, even if that's just one or two people.
+
+However, if you have a team of individuals that frequently access the ZVM, you may want to consider integrating your authentication system. This tutorial will provide instructions on how to integrate Active Directory, but you will need to consult the Zerto documentation if you have a different auth provider.
 
 The next section, however, is necessary reading for any organization.
 
 ### Admin Permissions
 
-Before we proceed, we must first ensure that the preconfigured Admin account has the right permissions to upgrade the ZVM. This does not always come included as part of the installation process. 
+For reasons beyond understanding, Zerto has not included permissions for the preconfigured admin account to upgrade the ZVM. If you have attempted to update and are met with a flickering screen (it continually refreshes over and over) in the management console, this is why. 
 
 Go to https<span>://ZVM-IP</span>/auth in your web browser and authenticate as the admin user. You will be required to change the password if you have not been to this page already.
 
@@ -162,7 +164,7 @@ Once here, you will need to change the Keycloak "Realm" in the top left to "zert
 
 Next click on the "Users" tab, and search for "admin". Click into the admin user, and go to the "Role Mapping" tab.
 
-Assign a new role, and then filter roles by client. Find the "ZertoRole_Admin" role and add it to the admin user. You may need to expand how many entries you can see on a page. Your roles should look like below:
+Assign a new role, and then filter roles by client. Find "ZertoRole_Admin" and add it to the admin user. You may need to expand how many entries you can see on a page to find it. Your roles should look like below:
 
 ![alt text](image-7.png)
 
@@ -186,16 +188,17 @@ Below are the necessary steps to connect Keycloak to your AD server:
     - Add LDAP Provider
 2. Input necessary connection information
     - Connection URL: ldap://Your_AD_Server_IP
+    - Test connection. If it doesn't work, double check your IP/FQDN and that LDAP will work with your server
     - Bind Type: Simple
     - Bind DN: Common name of your service account
         - To find this, go to the attribute editor of your service account and find the "distinguishedName" field and copy it here. Ex. CN=service-bot,OU=ServiceAccounts,DC=example,DC=local
     - Bind credentials: Password of the service account
-    - Test authentication. If it doesn't work, either your password is wrong or the Bind DN is.
+    - Test authentication. If it doesn't work either your password is wrong or the Bind DN is
 3. Input necessary info to find users and groups
     - Edit mode: READ_ONLY
-        - If this is a different value, it gives Keycloak permission to edit your AD users. Don't let it do this! Keep it READ_ONLY
-    - Users DN: DC=example,DC=local
-        - This is all of the "DC's" of your AD server. Whatever DC's were on the end of the service bot's DN is what you'll put here. (This is the simple way of doing it)
+        - Please only use READ_ONLY, other values give Keycloak permission to write to your AD server (and that's bad)
+    - Users DN: CN=Users,DC=example,DC=local
+        - This is the distinguished name of the location where your users reside. You can use the attribute editor of a group to find the DN.
     - Search Scope: Subtree
     - Periodic full sync: ON
         - This will make it so Keycloak will scan for changes
@@ -213,7 +216,7 @@ Below are the necessary steps to connect Keycloak to your AD server:
     - Add groups-mapper mapper
         - Name: groups-mapper
         - Mapper-Type: group-ldap-mapper
-        - LDAP Groups DN: DC=example,DC=local
+        - LDAP Groups DN: CN=Users,DC=example,DC=local
             - Same as the Users DN from before
         - LDAP Filter: (CN=Your_Group)
             - This is the common name of your group. It does not need the full name, just the first bit with the group name.
@@ -224,8 +227,9 @@ Below are the necessary steps to connect Keycloak to your AD server:
 5. Import users and groups into Keycloak
     - Go back to the screen where you input connection information and go to mappers tab
     - Click on the newly created "groups-mapper" mapper
-    - The top right action drop down, choose "Sync LDAP groups to Keycloak"
-        - It should say that a group or groups were imported
+    - Under the top right action drop down, choose "Sync LDAP groups to Keycloak"
+        - It should say that your group or groups were imported
+        - Verify they were imported by finding them in the "Groups" tab on the left
 6. Give permissions to groups/users
     - Go to the Groups tab
     - Click on the group you want to change permissions
