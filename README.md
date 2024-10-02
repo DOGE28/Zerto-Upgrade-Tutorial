@@ -321,7 +321,7 @@ This will happen if you do not have the appropriate permissions set for your adm
 There is a chance that when setting the host name using the appliance-manager, it doesn't get set properly. This will lead to HTTP 5XX errors supplied by Nginx. 
 This typically means that the `hosts` file was not configured properly.
 
-Running the below command will edit the `hosts` file, and change the host name (adjust for the host name you want to use):
+Running the below command will edit the `hosts` file, and change the host name (adjust for the host name you want to use). Your host name will not include a domain, Ex. `host_name` is correct, `host_name.example.com` is wrong and will cause additional issues.
 
 ```
 sudo hostnamectl set-hostname YOUR_HOST_NAME
@@ -337,4 +337,6 @@ Your file should look similar to this:
 
 ![alt text](image-9.png)
 
-If it doesn't, change the 
+If it doesn't, change the second line to look like it does in the above photo (using your host name). Use `Ctl + X` then press 'Y' to save the changes and exit.
+
+Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change made persisted through the reboot. If it looks right and it is still giving this error, contact Tonaquint to assist further.
