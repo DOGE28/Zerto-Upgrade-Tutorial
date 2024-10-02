@@ -308,7 +308,7 @@ You should be able to tab-complete the file so you don't have to type the whole 
 If you get an error saying that the file is actually a folder, add a `-R` in front of `rm` and it will delete it.
 
 > [!CAUTION]
-> The -R flag means "recursive". It can and will delete anything and everything, including subfolders, in a given directory if used wrong. This command has no safety catches. If you accidentally type in the wrong directory here, it can be catastrophic. Another reason to take a snapshot!
+> The -R flag means "recursive". It can and will delete anything and everything, including subfolders, in a given directory if used wrong. This command has no safety catches which is why we don't include it in the first command. If you accidentally type in the wrong directory here, it can be catastrophic. Another reason to take a snapshot!
 
 Once these unecessary files have been deleted, you may try to upgrade again. If you continue to run into the same issue, please restart the entire VM and try again. If it still doesn't work, please contact Tonaquint and we will open a Zerto support ticket on your behalf.
 
