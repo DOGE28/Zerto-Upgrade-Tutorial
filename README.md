@@ -333,7 +333,8 @@ We then want to make sure it worked:
 sudo nano /etc/hosts
 ```
 
-your file should look similar to this:
+Your file should look similar to this:
+
 ![alt text](image-9.png)
 
 If it doesn't, change the 
