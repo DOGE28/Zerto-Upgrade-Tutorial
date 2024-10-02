@@ -47,7 +47,7 @@ Follow the steps and make sure that your Windows ZVM can connect using the SA cr
 
 You will need a total of three IPs to perform the migration; the IP currently being used by the Windows ZVM, one for the Linux ZVM, and a floater used during the migration.
 
-These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to make sure that the IPs we wanted to use were not being used by another device before committing to using them. 
+These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to ensure no IP conflicts. 
 
 Keep the IPs you've found somewhere close by as they'll be used shortly.
 
@@ -88,14 +88,14 @@ The VM comes with a preconfigured Linux user:
     - Zertodata123!
 
 
-Open up a console in the VM and log in using the above credentials.
+Open up a console for the VM and log in using the above credentials.
 You will be asked to change the password before proceeding.
 
 You will then be greeted by the appliance manager menu.
 
 ![alt text](image-2.png)
 
-You will want to enter number 2, then 2 again to configure a static IP. Fill out the necessary information and verify that it can connect to the internet. You can do this by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly.
+You will want to enter number 2, then 2 again to configure a static IP. It will take some time for the changes to take effect. Once finished, verify it can connect to the internet by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly.
 
 You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
 
@@ -276,7 +276,7 @@ Once the upgrade is finished, you will want to double check that your VRAs have 
 ### Troubleshooting
 
 > [!IMPORTANT]
-> This is where we once again instruct you to take a snapshot of the Linux ZVM, especially if it is currently working. We do not want you to have to manually reconfigure anything or have to start this process over.
+> This is where we once again instruct you to take a snapshot of the Linux ZVM, especially if it is currently replicating. We do not want you to have to manually reconfigure anything or have to start this process over.
 
 ***Not Enough Storage Error***
 
