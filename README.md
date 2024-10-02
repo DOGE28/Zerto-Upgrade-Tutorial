@@ -1,20 +1,22 @@
 # Zerto ZVM Upgrade Documentation and Tutorial
 
 This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance.
+
 The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 10.0 U2. Zerto requires there be at most a two version gap when upgrading. Please upgrade your existing Windows ZVM to version 9.7 U4 before continuing.
 
 If you are viewing this to upgrade your current Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
 
 > [!IMPORTANT]
-> Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process
+> Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process and all VRAs state they are on the latest version. If your version is 9.7 U4 then you are ready to proceed.
 
 > [!CAUTION]
-> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different hypervisor, this upgrade path WILL NOT be possible for you. Additional platforms will be supported in future migration tool releases.
+> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different VM platform this upgrade path **WILL NOT** be possible for you. Please contact Tonaquint to discuss possible solutions.
 
 ## Pre-Migration
 
-Before we begin, there are a few considerations we must take into account.
+Before we begin, there are a few considerations we must take into account:
 
+* Please ensure your current Windows ZVM verision is at 9.7 U4 before proceeding.
 * This is a full migration from Windows to Linux, and is achieved through the use of a migration tool that Zerto provides. The Windows ZVM can be decommissioned once the migration has been completed and verified.
 * If your ZVM currently uses an external database you will need to ensure the Linux appliance can connect to it before beginning the migration. (Steps to verify are included here)
 * There will be a total of three IPs needed as part of this migration. These must be in the same subnet and allow interconnectivity between them all.
@@ -25,14 +27,14 @@ Because of the change from Windows to Linux, we are unable to use Windows authen
 
 To determine if your ZVM was configured with an external database, follow these steps:
 
-1. On your Windows ZVM, open the file `Program Files\Zerto\Zerto Virtual Replication\storage_properties.xml`
+1. On your Windows ZVM, open the file `C:\Program Files\Zerto\Zerto Virtual Replication\storage_properties.xml`
 
 2. If the value under **m_server** is similar to `\\.\pipe\LOCALDB#SHD79E11\tsql\query`, then you have an embedded database. You may skip to the next section.
     - If the value is an FQDN or IP address, then your SQL database is externally hosted and you need to proceed with the next steps below.
 
 If your ZVM does use an external database, you will need to log into your database as an administrator and ensure there is a local account with the System Administrator (SA) role and take note of its credentials.
 
-You will then go into your current Windows ZVM, then using the search bar near the start icon look for "Zerto Diagnostic Tool". Start this, then look for the "Change SQL Server Credentials" option.
+You will then go into your current Windows ZVM and use the search bar near the start icon to look for "Zerto Diagnostic Tool.exe". Start this, then look for the "Change SQL Server Credentials" option.
 
 > [!Note]
 > The diagnostic tool can also be found at: `C:\Program Files\Zerto\Zerto Virtual Replication\Diagnostics\ZertoDiagnostics.exe`
@@ -47,9 +49,6 @@ You will need a total of three IPs to perform the migration; the IP currently be
 
 These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to make sure that the IPs we wanted to use were not being used by another device before committing to using them. 
 
->[!TIP]
-> If you already have the Linux ZVM set up, you can run a `ping` command to ensure connectivity to the Windows ZVM.
-
 Keep the IPs you've found somewhere close by as they'll be used shortly.
 
 During the migration, the Linux ZVM will steal the Windows IP, then the Windows ZVM will be given the floater IP. The original Linux ZVM IP will no longer be used immediately after migration.
@@ -62,12 +61,12 @@ The Linux ZVM appliance VM must be setup prior to using the migration tool. This
 * Setting up networking
 * Making sure SSH is enabled
 
-Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://www.zerto.com/myzerto/support/downloads/) from the support site, and deploying it as any other VM.
+Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://www.zerto.com/myzerto/support/downloads/) from the support site, and deploying it as any other VM. Please contact Tonaquint if you would like additional assistance with deployment.
 
 >[!WARNING]
-> We choose not to change any of the preconfigured settings when deploying the OVF. If you do change anything please know that you are deviating from this tutorial and Zerto support may be the only ones that can fix any potential issues. Consult the Zerto documentation for options that are safe to change.
+> Zerto does not provide any guidance for changing VM properties such as CPU, memory, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to Tonaquint before proceeding and they will contact Zerto support to provide a solution.
 
-Once deployment is complete, you may power it on. 
+Once deployment is complete, you may power it on.
 
 You may now connect to the ZVM in your web browser at  ht<span>tps://</span>ZVM-IP  to verify it was deployed correctly. The port :9669 is no longer needed.
 
@@ -89,7 +88,6 @@ The VM comes with a preconfigured Linux user:
     - Zertodata123!
 
 
-
 Open up a console in the VM and log in using the above credentials.
 You will be asked to change the password before proceeding.
 
@@ -101,7 +99,10 @@ You will want to enter number 2, then 2 again to configure a static IP. Fill out
 
 You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
 
-Next, enter number 7 and enable SSH. You will want to confirm that SSH is working by using the `ssh zadmin@<ZVM-IP>` command and logging in from another computer (Like from the Windows ZVM to again verfiy connectivity). If you ever need to change the password for this account in the future, you may exit to shell and use the `passwd` command to change it.
+Next, enter number 7 and enable SSH. 
+
+>[!TIP]
+> Now is a good time to ensure connectivity between this Linux VM and the Windows ZVM. First use `ping` to verify they can talk to each other, then use `ssh zadmin@ZVM-IP` in a terminal on the Windows ZVM to confirm that SSH is enabled and working.
 
 Your Linux ZVM appliance is now ready for migration.
 
@@ -115,9 +116,9 @@ Your Linux ZVM appliance is now ready for migration.
 
 You will want to download the [Zerto Migration Tool](https://www.zerto.com/myzerto/support/downloads/) onto the Windows ZVM. **Take care to choose the migration tool for the 10.0 U2 version!**
 
-Once downloaded, open the .exe and click on the "Read me" link that will open up the Zerto documentation. Once the page is launched, you can proceed to the next screen.
+Once downloaded, open the .exe and click on the "Read me" link that will open up the Zerto documentation. Once the page is launched, you can close it and proceed to the next screen in the tool.
 
-Enter the Linux ZVM IP address, username, and password. Then validate SSH connectivity. Once validated, proceed to the next screen.
+Enter the Linux ZVM IP address, username, and password and validate SSH connectivity. Once validated, proceed to the next screen.
 
 ![alt text](image-3.png)
 
@@ -148,9 +149,9 @@ If you have simple access needs, i.e. you only have one or two individuals that 
 
 Our recommendation is that anyone that needs access should have their own user defined in Keycloak, even if that's just one or two people.
 
-However, if you have a team of individuals that frequently access the ZVM, you may want to consider integrating your authentication system. This tutorial will provide instructions on how to integrate Active Directory, but you will need to consult the Zerto documentation if you have a different auth provider.
+However, if you have a team of individuals that frequently access the ZVM, you may want to consider integrating your authentication system. This tutorial will provide instructions on how to integrate Active Directory, but you will need to consult the Zerto/Keycloak documentation if you have a different auth provider.
 
-The next section, however, is necessary reading for any organization.
+**The next section, however, is necessary reading for all organizations.**
 
 ### Admin Permissions
 
@@ -175,7 +176,7 @@ The admin account should now be able to access the "Appliance Upgrade" tab in th
 > [!IMPORTANT]
 > This section will require you to have some understanding of how your Active Directory is laid out. LDAP can be confusing, so don't hesitate to reach out to someone at Tonaquint if necessary.
 
-You will need to have a few things prior to starting the integration process:
+You will need to have a couple of things prior to starting the integration process:
 
 * An AD service account that can be used to read groups and users
 * A specific group or groups you want imported into Keycloak
@@ -268,7 +269,7 @@ You will see an upgrade button in the top right, click on it and you will see a 
 
 ![alt text](image-8.png)
 
-The ZVM will then begin the upgrade process. I will unauthenticate you from the management console multiple times. You can simply log back in to watch the progress of the upgrade.
+The ZVM will then begin the upgrade process. It will log you out from the management console multiple times, log back in to watch the progress of the upgrade.
 
 Once the upgrade is finished, you will want to double check that your VRAs have all been updated or are currently updating. If they aren't, please start that process manually.
 
@@ -315,6 +316,24 @@ Once these unecessary files have been deleted, you may try to upgrade again. If 
 
 This will happen if you do not have the appropriate permissions set for your admin account when trying to access the "Application Upgrade" tab in the management console. Please refer to the [Admin Permissions](#admin-permissions) section to get this resolved.
 
+***5XX HTTP Errors when attempting to reach ZVM web page***
 
+There is a chance that when setting the host name using the appliance-manager, it doesn't get set properly. This will lead to HTTP 5XX errors supplied by Nginx. 
+This typically means that the `hosts` file was not configured properly.
 
+Running the below command will edit the `hosts` file, and change the host name (adjust for the host name you want to use):
 
+```
+sudo hostnamectl set-hostname YOUR_HOST_NAME
+```
+
+We then want to make sure it worked:
+
+```
+sudo nano /etc/hosts
+```
+
+your file should look similar to this:
+![alt text](image-9.png)
+
+If it doesn't, change the 
