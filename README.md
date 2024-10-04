@@ -2,7 +2,7 @@
 
 This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance, as well as updating your Linux ZVM post-migration.
 
-Tonaquint requires your currenct Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to the above version before proceeding.
+Tonaquint requires your currenct Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to this point before proceeding.
 
 For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times to reach the latest version.
 
@@ -59,7 +59,7 @@ During the migration, the Linux ZVM will steal the Windows IP, then the Windows 
 
 * Deploying the VM
 * Setting up networking
-* Making sure SSH is enabled
+* Enabling SSH
 
 Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://www.zerto.com/myzerto/support/downloads/) from the support site, and deploying it as any other VM. Please contact Tonaquint if you would like additional assistance with deployment.
 
@@ -103,7 +103,7 @@ You will want to enter number 2, then 2 again to configure a static IP. Once fin
 
 You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
 
-Next, enter number 7 and enable SSH. 
+Next, enter number 7 and enable SSH.
 
 >[!TIP]
 > Now is a good time to ensure connectivity between this Linux VM and the Windows ZVM. First use `ping` to verify they can talk to each other, then use `ssh zadmin@ZVM-IP` in a terminal on the Windows ZVM to log in and confirm that SSH is enabled and working.
@@ -137,7 +137,9 @@ Finally, you will be presented with a summary screen where you can verify all of
 
 ![alt text](image-5.png)
 
-Return to the ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to catch up, so don't worry if it's not immediately replicating. Also make sure to check on the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them.
+If for any reason the migration is not able to proceed, it will preserve all settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue).
+
+Return to the *Linux* ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to catch up, so don't worry if it's not immediately replicating. Also make sure to check on the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them.
 
 ## Authentication
 
@@ -183,10 +185,11 @@ The admin account should now be able to access the "Appliance Upgrade" tab in th
 > [!IMPORTANT]
 > This section will require you to have some understanding of how your Active Directory is laid out. LDAP can be confusing, so don't hesitate to reach out to someone at Tonaquint if necessary.
 
-You will need to have a couple of things prior to starting the integration process:
+You will need to have a few of things prior to starting the integration process:
 
 * An AD service account that can be used to read groups and users
 * A specific group or groups you want imported into Keycloak
+* An AD server with LDAP enabled
 
 Below are the necessary steps to connect Keycloak to your AD server:
 
@@ -298,7 +301,7 @@ Below you'll find some issues that Tonaquint encountered when migrating from Win
 
 ***Not Enough Storage Error***
 
-When attempting to upgrade your ZVM you may be met with an error stating there isn't enough storage space to download the update. This is most likely due to the old update not being removed, and would most likely happen while attempting to update from an intermediate version to the final target version.
+When attempting to upgrade your ZVM you may be met with an error stating there isn't enough storage space to download the update. This is most likely due to the old update not being removed, and usually happens while attempting to update from an intermediate version to the final target version.
 
 The solution involves using the Linux command line. If you are not comfortable with a CLI, either escalate this to someone who is, or contact Tonaquint and they can help guide you through the process. If you are comfortable, you may proceed with caution.
 
