@@ -263,7 +263,7 @@ Zerto only allows upgrading up to two major versions away from your current vers
 
 This point is incredibly important, as this two-away versioning also applies to compatibility. If Tonaquint is on 10.0 U2 and you upgrade to 10.0 U5 (three major versions apart), replication will break and you will need to roll back your whole environment. The ZVM will typically prevent you from upgrading to an incompatible version, but in the case it doesn't it's important to know this information.
 
-With Tonaquint's permission, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
+With Tonaquint's blessing, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
 
 You will see an upgrade button in the top right, click on it and you will see a list of available versions. Select the version that Tonaquint has asked you to upgrade to. You will want to ensure there is a Zerto "Z" next to the version you choose, then click "Upgrade". 
 
@@ -278,9 +278,13 @@ Once the upgrade is finished, you will want to double check that your VRAs have 
 
 The Linux ZVM does not come with any out-of-the-box reporting on it's current status. There is the potential to have the ZVM running, but there be an issue with a VPG or VRA that wouldn't show up on a basic health check (like if you use `ping` for monitoring). Tonaquint has developed a simple service that can run on your ZVM that will periodically check the throughput of your sites and VPGs to ensure that the ZVM is running properly, and send you an email notification if it isn't.
 
+While this service is not necessary, it can provide additional peace of mind knowing that your environment is working as intended.
+
 You can find the installation instructions [**here**](https://github.com/DOGE28/Zerto-VPG-Checker-Linux)
 
 ### Troubleshooting
+
+Below you'll find some issues that Tonaquint encountered when migrating from Windows to Linux, as well as their solutions. 
 
 > [!IMPORTANT]
 > This is where we once again instruct you to take a snapshot of the Linux ZVM, especially if it is currently replicating. We do not want you to have to manually reconfigure anything or have to start this process over.
@@ -298,12 +302,12 @@ First we will need to do some investigating to find exactly where and what is ta
 2. Use the `ls` command to list directories and find what is taking up the space.
 
 ```
-cd /opt/zerto/zvr/upgrade-files && ls -h
+cd /opt/zerto/zvr/upgrade-files && ls -h | grep bundle
 ```
 
-This command will change directories to where the upgrade files are stored, then list all files and folders including their sizes.
+This command will change directories to where the upgrade files are stored, then list all files and folders with "bundle" in the name, including their sizes (if over 1MB).
 
-3. Look for any files that include "bundle" in the name. These are the leftovers of the previous upgrade and need to be removed. They will usually have part of the version in the name as well, so for example it may look similar (but not exactly) to "bundleXXX.10.0.20.XXX".
+3. These are the leftovers of the previous upgrade and need to be removed. They will usually have part of the version in the name as well, so for example it may look similar (but not exactly) to "bundleXXX.10.0.20.XXX".
 
 Then, use the below command, adjusted for your file, to remove it from the system.
 
@@ -326,7 +330,7 @@ This will happen if you do not have the appropriate permissions set for your adm
 ***5XX HTTP Errors when attempting to reach ZVM web page***
 
 There is a chance that when setting the host name using the appliance-manager, it doesn't get set properly. This will lead to HTTP 5XX errors supplied by Nginx. 
-This typically means that the `hosts` file was not configured properly.
+This typically means that the `hosts` file is not configured properly.
 
 Running the below command will edit the `hosts` file, and change the host name (adjust for the host name you want to use). Your host name will not include a domain, Ex. `host_name` is correct, `host_name.example.com` is wrong and will cause additional issues.
 
