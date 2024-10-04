@@ -273,6 +273,13 @@ The ZVM will then begin the upgrade process. It will log you out from the manage
 
 Once the upgrade is finished, you will want to double check that your VRAs have all been updated or are currently updating. If they aren't, please start that process manually.
 
+
+### ZVM Health Check
+
+The Linux ZVM does not come with any out-of-the-box reporting on it's current status. There is the potential to have the ZVM running, but there be an issue with a VPG or VRA that wouldn't show up on a basic health check (like if you use `ping` for monitoring). Tonaquint has developed a simple service that can run on your ZVM that will periodically check the throughput of your sites and VPGs to ensure that the ZVM is running properly, and send you an email notification if it isn't.
+
+You can find the installation instructions [**here**](https://github.com/DOGE28/Zerto-VPG-Checker-Linux)
+
 ### Troubleshooting
 
 > [!IMPORTANT]
