@@ -1,10 +1,10 @@
 # Zerto ZVM Upgrade Documentation and Tutorial
 
-This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance.
+This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance, as well as updating your Linux ZVM post-migration.
 
-The versions we suggest upgrading from/to is Zerto 9.7 U4 (any patch) to Zerto 10.0 U2. Zerto requires there be at most a two version gap when upgrading. Please upgrade your existing Windows ZVM to version 9.7 U4 before continuing.
+Tonaquint requires your currenct Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to the above version before proceeding.
 
-
+For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times to reach the latest version.
 
 > [!IMPORTANT]
 > Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process and all VRAs state they are on the latest version. If you are viewing this to upgrade your current Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
@@ -49,13 +49,13 @@ You will need a total of three IPs to perform the migration; the IP currently be
 
 These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to ensure no IP conflicts. 
 
-Keep the IPs you've found somewhere close by as they'll be used shortly.
+Keep the IPs, gateway, subnet mask, and DNS somewhere close by as they'll be used shortly.
 
 During the migration, the Linux ZVM will steal the Windows IP, then the Windows ZVM will be given the floater IP. The original Linux ZVM IP will no longer be used immediately after migration.
 
 ### Linux ZVM Setup
 
-The Linux ZVM appliance VM must be setup prior to using the migration tool. This includes the following:
+**The Linux ZVM appliance VM must be setup prior to using the migration tool.** This includes the following:
 
 * Deploying the VM
 * Setting up networking
@@ -63,8 +63,10 @@ The Linux ZVM appliance VM must be setup prior to using the migration tool. This
 
 Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://www.zerto.com/myzerto/support/downloads/) from the support site, and deploying it as any other VM. Please contact Tonaquint if you would like additional assistance with deployment.
 
+The deployment process may ask you to configure the VM's network as part of that process. If it does, you should be able to connect to the web UI right away. If not, you will need to take some additional steps outlined a bit further down in this section.
+
 >[!WARNING]
-> Zerto does not provide any guidance for changing VM properties such as CPU, memory, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to Tonaquint before proceeding and they will contact Zerto support to provide a solution.
+> Zerto does not provide any guidance for changing VM properties such as CPU, memory, disk size, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to Tonaquint before proceeding and they will contact Zerto support to provide a solution.
 
 Once deployment is complete, you may power it on.
 
@@ -79,7 +81,7 @@ The ZVM comes with a preconfigured user specifically for the ZVM:
 You will be asked to change the default password when you first log in.
 
 >[!NOTE]
-> If you are unable to reach the ZVM in the web browser, you will need to configure your network settings. Whether you can connect or not, you will want to double check your network settings before performing the migration by using number 1 in the below menu.
+> If you were not asked during deployment to configure network settings, you will need to follow the steps below. However, whether you can connect or not, you will want to double check your network settings before performing the migration by using number 1 in the below menu.
 
 The VM comes with a preconfigured Linux user:
 
@@ -95,14 +97,16 @@ You will then be greeted by the appliance manager menu.
 
 ![alt text](image-2.png)
 
-You will want to enter number 2, then 2 again to configure a static IP. It will take some time for the changes to take effect. Once finished, verify it can connect to the internet by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly.
+If you did not setup networking during deployment, this is where you will do it.
+
+You will want to enter number 2, then 2 again to configure a static IP. Once finished, verify it can connect to the internet by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly. It may take some time for the changes to take effect.
 
 You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
 
 Next, enter number 7 and enable SSH. 
 
 >[!TIP]
-> Now is a good time to ensure connectivity between this Linux VM and the Windows ZVM. First use `ping` to verify they can talk to each other, then use `ssh zadmin@ZVM-IP` in a terminal on the Windows ZVM to confirm that SSH is enabled and working.
+> Now is a good time to ensure connectivity between this Linux VM and the Windows ZVM. First use `ping` to verify they can talk to each other, then use `ssh zadmin@ZVM-IP` in a terminal on the Windows ZVM to log in and confirm that SSH is enabled and working.
 
 Your Linux ZVM appliance is now ready for migration.
 
@@ -110,6 +114,9 @@ Your Linux ZVM appliance is now ready for migration.
 > It is highly suggested to also setup authentication through Keycloak at this point, but it is not required. See the [Authentication](#Authentication) section to see if your organization should leverage additional authentication methods.
 
 ## Migration Tool
+
+>[!IMPORTANT]
+> Before proceeding, please verify you have completed all of the [Pre-Migration](#pre-migration) steps to ensure the migration goes smoothly!
 
 >[!IMPORTANT]
 > This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient.
@@ -350,4 +357,4 @@ Your file should look similar to this:
 
 If it doesn't, change the second line to look like it does in the above photo (using your host name). Use `Ctl + X` then press 'Y' to save the changes and exit.
 
-Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change made persisted through the reboot. If it looks right and it is still giving this error, contact Tonaquint to assist further.
+Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change persisted through the reboot. If it looks right and it is still giving this error, contact Tonaquint to assist further.
