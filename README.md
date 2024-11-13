@@ -2,7 +2,7 @@
 
 This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance, as well as updating your Linux ZVM post-migration.
 
-Tonaquint requires your currenct Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to this point before proceeding.
+Tonaquint requires your current Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to this point before proceeding.
 
 For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times to reach the latest version.
 
