@@ -292,7 +292,7 @@ The Linux ZVM does not come with any out-of-the-box reporting on it's current st
 
 While this service is not necessary, it can provide additional peace of mind knowing that your environment is working as intended.
 
-You can find the installation instructions [**here**](https://github.com/DOGE28/Zerto-VPG-Checker-Linux)
+You can find the installation instructions [**here**](https://github.com/DOGE28/Zerto-VPG-Checker-Linux/tree/Client)
 
 ### Troubleshooting
 
