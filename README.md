@@ -137,7 +137,9 @@ Finally, you will be presented with a summary screen where you can verify all of
 
 ![alt text](image-5.png)
 
-If for any reason the migration is not able to proceed, it will preserve all settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue).
+The IP change happens a minute or so into the migration and will cause you to disconnect if using RDP. If you want to continue monitoring it's progress you will need to log back in using the new floater IP.
+
+If for any reason the migration is not able to proceed, it will preserve all original settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue).
 
 Return to the *Linux* ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to catch up, so don't worry if it's not immediately replicating. Also make sure to check on the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them.
 
