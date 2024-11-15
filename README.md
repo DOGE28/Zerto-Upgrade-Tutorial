@@ -363,3 +363,31 @@ Your file should look similar to this:
 If it doesn't, change the second line to look like it does in the above photo (using your host name). Use `Ctl + X` then press 'Y' to save the changes and exit.
 
 Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change persisted through the reboot. If it looks right and it is still giving this error, contact Tonaquint to assist further.
+
+***Unable to install VRA due to incompatibility issue (Despite the intercompatibility matrix stating it's compatible)***
+
+If you run into an error looking like `VRA installation IP=X.X.X.X. Failed: One or more errors occurred. (ESX 80 update 3 is not supported. Latest supported ESX build is update 2. )` while attempting to install a VRA, yet you know that the version is listed as compatible on the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/), please follow the below steps:
+
+> [!CAUTION]
+> Only follow these next steps if you are 100% confident that the version of Zerto that you're using is in fact compatible. Doing this wrong may cause stability and replication issues due to mismatched versions and the loss of site intercompatibility. 
+
+On the CLI of the ZVM (log in via SSH or vSphere web console and use 0 to enter shell), run this command:
+```cat /var/data/zerto/zvr/zvm/vra/supported_updates.txt```
+You should see something like this:
+
+```
+ESX_67 4
+ESX_70 3
+ESX_80 2
+...
+```
+
+You will need to change the line `ESX_80 2` to `ESX_80 3`.
+
+```
+sudo nano /var/data/zerto/zvr/zvm/vra/supported_updates.txt
+```
+
+Exit by pressing `Ctrl + X` followed by `Y` to save your changes.
+
+The change should be reflected immediately. If installing the VRA still fails, reboot the ZVM and try again.
