@@ -303,7 +303,7 @@ Below you'll find some issues that Tonaquint encountered when migrating from Win
 
 ***Not Enough Storage Error***
 
-When attempting to upgrade your ZVM you may be met with an error stating there isn't enough storage space to download the update. This is most likely due to the old update not being removed, and usually happens while attempting to update from an intermediate version to the final target version.
+When attempting to upgrade your ZVM you may be met with an error stating there isn't enough storage space to download the update. This is most likely due to the old update not being removed, and usually happens while attempting to update from an intermediate version to the final target version. (10.0U2 -> 10.0U3 -X 10.0U5)
 
 The solution involves using the Linux command line. If you are not comfortable with a CLI, either escalate this to someone who is, or contact Tonaquint and they can help guide you through the process. If you are comfortable, you may proceed with caution.
 
