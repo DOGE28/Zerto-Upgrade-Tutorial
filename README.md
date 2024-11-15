@@ -45,7 +45,7 @@ Follow the steps and make sure that your Windows ZVM can connect using the SA cr
 
 ### IP Addresses
 
-You will need a total of three IPs to perform the migration; the IP currently being used by the Windows ZVM, one for the Linux ZVM, and a floater used during the migration.
+You will need a total of three IPs to perform the migration; the IP currently being used by the Windows ZVM, one for the Linux ZVM you will build here shortly, and a floater used during the migration.
 
 These must all be in the same subnet and be allowed to connect to each other. Now is the time to ensure there are no firewall rules preventing communication within the subnet you plan to use. Consult your IP management data to avoid any conflicts. We also used the `ping` command to ensure no IP conflicts. 
 
