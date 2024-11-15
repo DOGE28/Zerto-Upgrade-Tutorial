@@ -382,7 +382,7 @@ ESX_80 2
 ...
 ```
 
-You will need to change the line `ESX_80 2` to `ESX_80 3`.
+You will need to change the line `ESX_80 2` to `ESX_80 3` (Or whatever version you're trying to add).
 
 ```
 sudo nano /var/data/zerto/zvr/zvm/vra/supported_updates.txt
