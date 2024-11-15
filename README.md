@@ -373,7 +373,9 @@ If you run into an error looking like `VRA installation IP=X.X.X.X. Failed: One 
 
 On the CLI of the ZVM (log in via SSH or vSphere web console and use 0 to enter shell), run this command:
 
-```cat /var/data/zerto/zvr/zvm/vra/supported_updates.txt```
+```
+cat /var/data/zerto/zvr/zvm/vra/supported_updates.txt
+```
 
 You should see something like this:
 
