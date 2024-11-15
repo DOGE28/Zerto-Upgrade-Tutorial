@@ -23,13 +23,13 @@ Before we begin, there are a few considerations we must take into account:
 
 ### External Database Connection
 
-Because of the change from Windows to Linux, we are unable to use Windows authentication for the database connection. A direct connection will need to be established instead using a local account.
+Because of the change from Windows to Linux, we are unable to use Windows authentication for the database connection. A direct connection will need to be established instead using a local account. 
 
 To determine if your ZVM was configured with an external database, follow these steps:
 
 1. On your Windows ZVM, open the file `C:\Program Files\Zerto\Zerto Virtual Replication\storage_properties.xml`
 
-2. If the value under **m_server** is similar to `\\.\pipe\LOCALDB#SHD79E11\tsql\query`, then you have an embedded database. You may skip to the next section.
+2. If the value under **m_server** is similar to `\\.\pipe\LOCALDB#SHD79E11\tsql\query`, then you have an embedded database. You may skip to the next [section](#ip-addresses).
     - If the value is an FQDN or IP address, then your SQL database is externally hosted and you need to proceed with the next steps below.
 
 If your ZVM does use an external database, you will need to log into your database as an administrator and ensure there is a local account with the System Administrator (SA) role and take note of its credentials.
