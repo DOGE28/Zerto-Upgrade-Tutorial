@@ -372,7 +372,9 @@ If you run into an error looking like `VRA installation IP=X.X.X.X. Failed: One 
 > Only follow these next steps if you are 100% confident that the version of Zerto that you're using is in fact compatible. Doing this wrong may cause stability and replication issues due to mismatched versions and the loss of site intercompatibility. 
 
 On the CLI of the ZVM (log in via SSH or vSphere web console and use 0 to enter shell), run this command:
+
 ```cat /var/data/zerto/zvr/zvm/vra/supported_updates.txt```
+
 You should see something like this:
 
 ```
