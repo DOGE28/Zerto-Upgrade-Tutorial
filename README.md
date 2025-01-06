@@ -344,6 +344,8 @@ This will happen if you do not have the appropriate permissions set for your adm
 There is a chance that when setting the host name using the appliance-manager, it doesn't get set properly. This will lead to HTTP 5XX errors supplied by Nginx. 
 This typically means that the `hosts` file is not configured properly.
 
+The `host_name` should be the same as the DNS record you intend to use. If you don't have a DNS record, or you aren't sure what to set it as, just copy the VM name within the hypervisor.
+
 Running the below command will edit the `hosts` file, and change the host name (adjust for the host name you want to use). Your host name will not include a domain, Ex. `host_name` is correct, `host_name.example.com` is wrong and will cause additional issues.
 
 ```
