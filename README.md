@@ -397,3 +397,4 @@ sudo nano /var/data/zerto/zvr/zvm/vra/supported_updates.txt
 Exit by pressing `Ctrl + X` followed by `Y` to save your changes.
 
 The change should be reflected immediately. If installing the VRA still fails, reboot the ZVM and try again.
+If the problem is not fixed using this solution, please contact Tonaquint. We will need to engage Zerto support in order to find a fix.
