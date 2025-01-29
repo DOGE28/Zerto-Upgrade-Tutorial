@@ -61,7 +61,7 @@ During the migration, the Linux ZVM will steal the Windows IP, then the Windows 
 * Setting up networking
 * Enabling SSH
 
-Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://www.zerto.com/myzerto/support/downloads/) from the support site, and deploying it as any other VM. Please contact Tonaquint if you would like additional assistance with deployment.
+Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://fileshare.networksully.cloud/api/public/dl/7WW50bpd/zvml-build-fy23q4_p2-10.0.22.1064.zip) from the download site, and deploying it as any other VM. Please contact Tonaquint if you would like additional assistance with deployment.
 
 The deployment process may ask you to configure the VM's network as part of that process. If it does, you should be able to connect to the web UI right away. If not, you will need to take some additional steps outlined a bit further down in this section.
 
@@ -121,7 +121,7 @@ Your Linux ZVM appliance is now ready for migration.
 >[!IMPORTANT]
 > This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient.
 
-You will want to download the [Zerto Migration Tool](https://www.zerto.com/myzerto/support/downloads/) onto the Windows ZVM. **Take care to choose the migration tool for the 10.0 U2 version!**
+You will want to download the [Zerto Migration Tool](https://fileshare.networksully.cloud/api/public/dl/OfUrJC-2/ZvmlMigrationTool_585.zip) onto the Windows ZVM.
 
 Once downloaded, open the .exe and click on the "Read me" link that will open up the Zerto documentation. Once the page is launched, you can close it and proceed to the next screen in the tool.
 
