@@ -2,7 +2,7 @@
 
 This tutorial will walk you through the necessary steps to upgrade your current Windows ZVM to the latest Linux ZVM appliance, as well as updating your Linux ZVM post-migration.
 
-Valor3c requires your current Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to this point before proceeding.
+ValorC3 requires your current Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to this point before proceeding.
 
 For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times at a later point in time to reach the latest version.
 
@@ -10,7 +10,7 @@ For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. 
 > Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process and all VRAs state they are on the latest version. If you are viewing this to upgrade your current Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
 
 > [!CAUTION]
-> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different VM platform this upgrade path **WILL NOT** be possible for you. Please contact Valor3c to discuss possible solutions.
+> This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different VM platform this upgrade path **WILL NOT** be possible for you. Please contact ValorC3 to discuss possible solutions.
 
 ## Pre-Migration
 
@@ -61,12 +61,12 @@ During the migration, the Linux ZVM will steal the Windows IP, then the Windows 
 * Setting up networking
 * Enabling SSH
 
-Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://f002.backblazeb2.com/file/TDC-ShareFiles/Zerto_Software/zvml-build-fy23q4_p2-10.0.22.1064.zip), and deploying it as any other VM. Please contact Valor3c if you would like additional assistance with deployment.
+Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://f002.backblazeb2.com/file/TDC-ShareFiles/Zerto_Software/zvml-build-fy23q4_p2-10.0.22.1064.zip), and deploying it as any other VM. Please contact ValorC3 if you would like additional assistance with deployment.
 
 The deployment process may ask you to configure the VM's network as part of that process. If it does, you should be able to connect to the web UI right away. If not, you will need to take some additional steps outlined a bit further down in this section.
 
 >[!WARNING]
-> Zerto does not provide any guidance for changing VM properties such as CPU, memory, disk size, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to Valor3c before proceeding and they will contact Zerto support to provide a solution.
+> Zerto does not provide any guidance for changing VM properties such as CPU, memory, disk size, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to ValorC3 before proceeding and they will contact Zerto support to provide a solution.
 
 Once deployment is complete, you may power it on.
 
@@ -185,7 +185,7 @@ The admin account should now be able to access the "Appliance Upgrade" tab in th
 
 ### Active Directory Integration
 > [!IMPORTANT]
-> This section will require you to have some understanding of how your Active Directory is laid out. LDAP can be confusing, so don't hesitate to reach out to someone at Valor3c if necessary.
+> This section will require you to have some understanding of how your Active Directory is laid out. LDAP can be confusing, so don't hesitate to reach out to someone at ValorC3 if necessary.
 
 You will need to have a few of things prior to starting the integration process:
 
@@ -269,15 +269,15 @@ Once these steps have been completed, you will want to test your credentials aga
 > [!CAUTION]
 > Unless you have been instructed to upgrade to a higher version, PLEASE DO NOT PROCEED. Failure to follow these instructions will lead to loss of ZVM replication and the need to roll back to a previous version.
 
-**From this point on, you should only proceed if you have been instructed to by Valor3c staff.**
+**From this point on, you should only proceed if you have been instructed to by ValorC3 staff.**
 
 Zerto only allows upgrading up to two major versions away from your current version. For example, if you are on 10.0 U2 and want to reach 10.0 U5, you will first need to upgrade to either 10.0 U3 or U4 before you can upgrade to U5. 
 
-This point is incredibly important, as this two-away versioning also applies to compatibility. If Valor3c is on 10.0 U2 and you upgrade to 10.0 U5 (three major versions apart), replication will break and you will need to roll back your whole environment. The ZVM will typically prevent you from upgrading to an incompatible version, but in the case it doesn't it's important to know this information.
+This point is incredibly important, as this two-away versioning also applies to compatibility. If ValorC3 is on 10.0 U2 and you upgrade to 10.0 U5 (three major versions apart), replication will break and you will need to roll back your whole environment. The ZVM will typically prevent you from upgrading to an incompatible version, but in the case it doesn't it's important to know this information.
 
-With Valor3c's blessing, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
+With ValorC3's blessing, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
 
-You will see an upgrade button in the top right, click on it and you will see a list of available versions. Select the version that Valor3c has asked you to upgrade to. You will want to ensure there is a Zerto "Z" next to the version you choose, then click "Upgrade". 
+You will see an upgrade button in the top right, click on it and you will see a list of available versions. Select the version that ValorC3 has asked you to upgrade to. You will want to ensure there is a Zerto "Z" next to the version you choose, then click "Upgrade". 
 
 ![alt text](image-8.png)
 
@@ -288,7 +288,7 @@ Once the upgrade is finished, you will want to double check that your VRAs have 
 
 ### ZVM Health Check
 
-The Linux ZVM does not come with any out-of-the-box reporting on it's current status. There is the potential to have the ZVM running, but there be an issue with a VPG or VRA that wouldn't show up on a basic health check (like if you use `ping` for monitoring). Valor3c has developed a simple service that can run on your ZVM that will periodically check the throughput of your sites and VPGs to ensure that the ZVM is running properly, and send you an email notification if it isn't.
+The Linux ZVM does not come with any out-of-the-box reporting on it's current status. There is the potential to have the ZVM running, but there be an issue with a VPG or VRA that wouldn't show up on a basic health check (like if you use `ping` for monitoring). ValorC3 has developed a simple service that can run on your ZVM that will periodically check the throughput of your sites and VPGs to ensure that the ZVM is running properly, and send you an email notification if it isn't.
 
 While this service is not necessary, it can provide additional peace of mind knowing that your environment is working as intended.
 
@@ -296,7 +296,7 @@ You can find the installation instructions [**here**](https://github.com/DOGE28/
 
 ### Troubleshooting
 
-Below you'll find some issues that Valor3c encountered when migrating from Windows to Linux, as well as their solutions. 
+Below you'll find some issues that ValorC3 encountered when migrating from Windows to Linux, as well as their solutions. 
 
 > [!IMPORTANT]
 > This is where we once again instruct you to take a snapshot of the Linux ZVM, especially if it is currently replicating. We do not want you to have to manually reconfigure anything or have to start this process over.
@@ -305,7 +305,7 @@ Below you'll find some issues that Valor3c encountered when migrating from Windo
 
 When attempting to upgrade your ZVM you may be met with an error stating there isn't enough storage space to download the update. This is most likely due to the old update not being removed, and usually happens while attempting to update from an intermediate version to the final target version. (10.0U2 -> 10.0U3 -X 10.0U5)
 
-The solution involves using the Linux command line. If you are not comfortable with a CLI, either escalate this to someone who is, or contact Valor3c and they can help guide you through the process. If you are comfortable, you may proceed with caution.
+The solution involves using the Linux command line. If you are not comfortable with a CLI, either escalate this to someone who is, or contact ValorC3 and they can help guide you through the process. If you are comfortable, you may proceed with caution.
 
 First we will need to do some investigating to find exactly where and what is taking up storage space.
 
@@ -333,7 +333,7 @@ If you get an error saying that the file is actually a folder, add a `-R` in fro
 > [!CAUTION]
 > The -R flag means "recursive". It can and will delete anything and everything, including subfolders, in a given directory if used wrong. This command has no safety catches which is why we don't include it in the first command. If you accidentally type in the wrong directory here, it can be catastrophic. Another reason to take a snapshot!
 
-Once these unecessary files have been deleted, you may try to upgrade again. If you continue to run into the same issue, please restart the entire VM and try again. If it still doesn't work, please contact Valor3c and we will open a Zerto support ticket on your behalf.
+Once these unecessary files have been deleted, you may try to upgrade again. If you continue to run into the same issue, please restart the entire VM and try again. If it still doesn't work, please contact ValorC3 and we will open a Zerto support ticket on your behalf.
 
 ***Flickering in the Management Console***
 
@@ -364,7 +364,7 @@ Your file should look similar to this:
 
 If it doesn't, change the second line to look like it does in the above photo (using your host name). Use `Ctl + X` then press 'Y' to save the changes and exit.
 
-Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change persisted through the reboot. If it looks right and it is still giving this error, contact Valor3c to assist further.
+Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change persisted through the reboot. If it looks right and it is still giving this error, contact ValorC3 to assist further.
 
 ***Unable to install VRA due to incompatibility issue (Despite the intercompatibility matrix stating it's compatible)***
 
@@ -397,4 +397,4 @@ sudo nano /var/data/zerto/zvr/zvm/vra/supported_updates.txt
 Exit by pressing `Ctrl + X` followed by `Y` to save your changes.
 
 The change should be reflected immediately. If installing the VRA still fails, reboot the ZVM and try again.
-If the problem is not fixed using this solution, please contact Valor3c. We will need to engage Zerto support in order to find a fix.
+If the problem is not fixed using this solution, please contact ValorC3. We will need to engage Zerto support in order to find a fix.
