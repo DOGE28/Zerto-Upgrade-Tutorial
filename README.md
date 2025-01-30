@@ -139,9 +139,11 @@ Finally, you will be presented with a summary screen where you can verify all of
 
 The IP change happens a minute or so into the migration and will cause you to disconnect if using RDP. If you want to continue monitoring it's progress you will need to log back in using the new floater IP.
 
-If for any reason the migration is not able to proceed, it will preserve all original settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue).
+If for any reason the migration is not able to proceed, it will preserve all original settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue). You may run into an issue where the migration fails, and you are given the error: `Connectivity error, unable to establish connection to VCenter or peer sites`. Please go to the [Troubleshooting](#troubleshooting) section and find the relevant solution.
 
 Return to the *Linux* ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to catch up, so don't worry if it's not immediately replicating. Also make sure to check that the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them before proceeding.
+
+
 
 ## Authentication
 
@@ -398,3 +400,21 @@ Exit by pressing `Ctrl + X` followed by `Y` to save your changes.
 
 The change should be reflected immediately. If installing the VRA still fails, reboot the ZVM and try again.
 If the problem is not fixed using this solution, please contact ValorC3. We will need to engage Zerto support in order to find a fix.
+
+***Migration Failed: "Connectivity error, unable to establish connection to VCenter or peer sites"***
+
+In the event you receive this error, follow the below steps provided by Zerto support:
+
+1. Take a snapshot of the Windows ZVM that you are trying to migrate
+
+2. Create a plain .txt file named: `tweaks.txt` in the same folder as the ZVM MigrationTool.exe
+
+3. Add two tweaks:
+   SkipNetworkMigration = True
+   SkipPeerConnectivityValidation = True
+
+4. Run the migration tool again and this time you should not be prompted to put in any IP information and no IP config changes should be made to the ZVMs.
+
+5. Manually change the IP of the old ZVM Windows server to a free IP address
+
+6. Manually change the IP of the new ZVM linux server to the correct IP addresss (aka the same IP address that was being used by the original Windows ZVM before)
