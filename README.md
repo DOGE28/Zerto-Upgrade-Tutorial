@@ -410,8 +410,8 @@ In the event you receive this error, follow the below steps provided by Zerto su
 2. Create a plain .txt file named: `tweaks.txt` in the same folder as the ZVM MigrationTool.exe
 
 3. Add two tweaks:
-   SkipNetworkMigration = True
-   SkipPeerConnectivityValidation = True
+   - SkipNetworkMigration = True
+   - SkipPeerConnectivityValidation = True
 
 4. Run the migration tool again and this time you should not be prompted to put in any IP information and no IP config changes should be made to the ZVMs.
 
