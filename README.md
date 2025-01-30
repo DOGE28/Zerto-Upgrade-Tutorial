@@ -70,7 +70,8 @@ The deployment process may ask you to configure the VM's network as part of that
 
 Once deployment is complete, you may power it on.
 
-You may now connect to the ZVM in your web browser at  ht<span>tps://</span>ZVM-IP  to verify it was deployed correctly. The port :9669 is no longer needed.
+You must now connect to the ZVM in your web browser at  ht<span>tps://</span>ZVM-IP  to verify it was deployed correctly. The port :9669 is no longer needed.
+
 
 The ZVM comes with a preconfigured user specifically for the ZVM:
 
@@ -89,6 +90,8 @@ The VM comes with a preconfigured Linux user:
     - zadmin
     - Zertodata123!
 
+>[!CAUTION]
+> If you see a warning on the console screen saying you need to access the WebUI prior to logging into the CLI, please do that first! If you don't you will need to redeploy your ZVM!
 
 Open up a console for the VM and log in using the above credentials.
 You will be asked to change the password before proceeding.
