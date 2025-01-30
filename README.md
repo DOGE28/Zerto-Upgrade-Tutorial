@@ -119,7 +119,7 @@ Your Linux ZVM appliance is now ready for migration.
 > Before proceeding, please verify you have completed all of the [Pre-Migration](#pre-migration) steps to ensure the migration goes smoothly!
 
 >[!IMPORTANT]
-> This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient.
+> This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient. You will also be required to redeploy the Linux ZVM in the event of a failed migration. A snapshot to the state just before migration means you don't have to redeploy!
 
 You will want to download the [Zerto Migration Tool](https://f002.backblazeb2.com/file/TDC-ShareFiles/Zerto_Software/ZvmlMigrationTool_585.zip) onto the Windows ZVM.
 
@@ -139,7 +139,7 @@ Finally, you will be presented with a summary screen where you can verify all of
 
 The IP change happens a minute or so into the migration and will cause you to disconnect if using RDP. If you want to continue monitoring it's progress you will need to log back in using the new floater IP.
 
-If for any reason the migration is not able to proceed, it will preserve all original settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue). You may run into an issue where the migration fails, and you are given the error: `Connectivity error, unable to establish connection to VCenter or peer sites`. Please go to the [Troubleshooting](#troubleshooting) section and find the relevant solution.
+If for any reason the migration is not able to proceed, it will preserve all original settings and allow you to fix whatever issues it found without affecting replication (minus the time it may have brought it down before it ran into an issue). You may run into an issue where the migration fails, and you are given the error: `Connectivity error, unable to establish connection to VCenter or peer sites`. Please go to the [Troubleshooting](#troubleshooting) section and find the relevant solution. Any time the migration fails you will need to redeploy the Linux ZVM. Another reason for a snapshot!
 
 Return to the *Linux* ZVM web page, and verify that the migration was successful. It took roughly an hour for our VPGs to catch up, so don't worry if it's not immediately replicating. Also make sure to check that the VRAs on each host in the "Setup" tab are either updated or are updating. If they are not, please manually update them before proceeding.
 
