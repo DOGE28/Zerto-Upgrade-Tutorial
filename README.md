@@ -418,3 +418,22 @@ In the event you receive this error, follow the below steps provided by Zerto su
 5. Manually change the IP of the old ZVM Windows server to a free IP address
 
 6. Manually change the IP of the new ZVM linux server to the correct IP addresss (aka the same IP address that was being used by the original Windows ZVM before)
+___________________________________________________________
+***Post-Migration VRA Warning: "ZORG of VPG was not found in storage..."***
+
+This is an acknowledged bug present in the migration tool. It can cause a non-ZCM connected ZVM to get a ZCM entry, causing the error.
+You can resolve this error by clearing this ZCM entry by following the below steps:
+
+1. Take a snapshot of the Linux ZVM
+
+2. Open an SSH console to the Linux appliance and exit to shell
+
+3. In the shell, execute the following command:
+    - `kubectl exec -it $(kubectl get pods | awk '{print $1}' | grep zvm-db) -- /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "zvmapp-5T^d#ak*Y6" -Q "use zvm_db; delete from CloudConfigurationIdentifierStorageObject;"`
+
+4. Run the `appliance-manager` command to get back to the menu
+
+5. Restart the appliance pods (Option 3)
+
+6. Refresh the WebUI and wait for the warnings to disappear.
+   - If they do not disappear, please reach out to ValorC3 so they can engage Zerto support.
