@@ -302,7 +302,7 @@ Below you'll find some issues that ValorC3 encountered when migrating from Windo
 
 > [!IMPORTANT]
 > This is where we once again instruct you to take a snapshot of the Linux ZVM, especially if it is currently replicating. We do not want you to have to manually reconfigure anything or have to start this process over.
-
+___________________________________________________________
 ***Not Enough Storage Error***
 
 When attempting to upgrade your ZVM you may be met with an error stating there isn't enough storage space to download the update. This is most likely due to the old update not being removed, and usually happens while attempting to update from an intermediate version to the final target version. (10.0U2 -> 10.0U3 -X 10.0U5)
@@ -336,7 +336,7 @@ If you get an error saying that the file is actually a folder, add a `-R` in fro
 > The -R flag means "recursive". It can and will delete anything and everything, including subfolders, in a given directory if used wrong. This command has no safety catches which is why we don't include it in the first command. If you accidentally type in the wrong directory here, it can be catastrophic. Another reason to take a snapshot!
 
 Once these unecessary files have been deleted, you may try to upgrade again. If you continue to run into the same issue, please restart the entire VM and try again. If it still doesn't work, please contact ValorC3 and we will open a Zerto support ticket on your behalf.
-
+___________________________________________________________
 ***Flickering in the Management Console***
 
 This will happen if you do not have the appropriate permissions set for your admin account when trying to access the "Application Upgrade" tab in the management console. Please refer to the [Admin Permissions](#admin-permissions) section to get this resolved.
@@ -367,7 +367,7 @@ Your file should look similar to this:
 If it doesn't, change the second line to look like it does in the above photo (using your host name). Use `Ctl + X` then press 'Y' to save the changes and exit.
 
 Return to the appliance manager by using the `appliance-manager` command, and select number 4: `Reboot Appliance`. Wait for it to come back up and see if the problem has cleared. If it has not cleared, double check that the host name change persisted through the reboot. If it looks right and it is still giving this error, contact ValorC3 to assist further.
-
+___________________________________________________________
 ***Unable to install VRA due to incompatibility issue (Despite the intercompatibility matrix stating it's compatible)***
 
 If you run into an error looking like `VRA installation IP=X.X.X.X. Failed: One or more errors occurred. (ESX 80 update 3 is not supported. Latest supported ESX build is update 2. )` while attempting to install a VRA, yet you know that the version is listed as compatible on the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/), please follow the below steps:
@@ -400,7 +400,7 @@ Exit by pressing `Ctrl + X` followed by `Y` to save your changes.
 
 The change should be reflected immediately. If installing the VRA still fails, reboot the ZVM and try again.
 If the problem is not fixed using this solution, please contact ValorC3. We will need to engage Zerto support in order to find a fix.
-
+___________________________________________________________
 ***Migration Failed: "Connectivity error, unable to establish connection to VCenter or peer sites"***
 
 In the event you receive this error, follow the below steps provided by Zerto support:
