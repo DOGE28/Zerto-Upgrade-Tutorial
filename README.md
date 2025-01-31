@@ -61,7 +61,7 @@ During the migration, the Linux ZVM will steal the Windows IP, then the Windows 
 * Setting up networking
 * Enabling SSH
 
-Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://f002.backblazeb2.com/file/TDC-ShareFiles/Zerto_Software/zvml-build-fy23q4_p2-10.0.22.1064.zip), and deploying it as any other VM. Please contact ValorC3 if you would like additional assistance with deployment.
+Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https://f002.backblazeb2.com/file/TDC-ShareFiles/Zerto_Software/zvml-build-fy23q4_p2-10.0.22.1064.zip) (Direct download), and deploying it as any other VM. Please contact ValorC3 if you would like additional assistance with deployment.
 
 The deployment process may ask you to configure the VM's network as part of that process. If it does, you should be able to connect to the web UI right away. If not, you will need to take some additional steps outlined a bit further down in this section.
 
