@@ -7,7 +7,7 @@ ValorC3 requires your current Windows ZVM version to be 9.7 U4 (any patch) in or
 For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times at a later point in time to reach the latest version.
 
 > [!IMPORTANT]
-> Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process and all VRAs state they are on the latest version. If you are viewing this to upgrade your current Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
+> Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process and all VRAs state they are on the latest version. If you are viewing this to upgrade your existing Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
 
 > [!CAUTION]
 > This migration is only possible using vCenter and vCenter Cloud Director. If you are using a different VM platform this upgrade path **WILL NOT** be possible for you. Please contact ValorC3 to discuss possible solutions.
