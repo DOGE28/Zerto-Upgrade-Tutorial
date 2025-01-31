@@ -66,7 +66,7 @@ Deploying the VM is as simple as downloading the [Zerto 10.0 U2 ZVM OVF](https:/
 The deployment process may ask you to configure the VM's network as part of that process. If it does, you should be able to connect to the web UI right away. If not, you will need to take some additional steps outlined a bit further down in this section.
 
 >[!WARNING]
-> Zerto does not provide any guidance for changing VM properties such as CPU, memory, disk size, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to ValorC3 before proceeding and they will contact Zerto support to provide a solution.
+> Zerto does not provide any guidance for changing VM properties such as CPU, memory, disk size, etc. Please do not change any of the preconfigured settings when deploying the OVF. If you have specific circumstances requiring a non-standard deployment, please reach out to ValorC3 before proceeding and they will contact Zerto support to discuss options.
 
 Once deployment is complete, you may power it on.
 
