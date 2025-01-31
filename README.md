@@ -90,9 +90,6 @@ The VM comes with a preconfigured Linux user:
     - zadmin
     - Zertodata123!
 
->[!CAUTION]
-> If you see a warning on the console screen saying you need to access the WebUI prior to logging into the CLI, please do that first! If you don't you will need to redeploy your ZVM!
-
 Open up a console for the VM and log in using the above credentials.
 You will be asked to change the password before proceeding.
 
@@ -102,7 +99,10 @@ You will then be greeted by the appliance manager menu.
 
 If you did not setup networking during deployment, this is where you will do it.
 
-You will want to enter number 2, then 2 again to configure a static IP. Once finished, verify it can connect to the internet by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly. It may take some time for the changes to take effect.
+You will want to enter number 2, then 2 again to configure a static IP. Once set, the appliance will reboot and after logging in again will go through an initialization period. This may take some time, so please be patient. 
+If it lasts longer than an hour, please stop the VM and redeploy it. You may need it to grab an IP via DHCP first, let it initialize, then change it to a static one if it continues to take too long.
+
+Once finished, verify it can connect to the internet by entering 0 on the main manager menu to exit to shell, then use `ping google.com` to make sure packets are making it out to the internet and DNS is working correctly. It may take some time for the changes to take effect.
 
 You can go back to the appliance manager menu from the shell by typing `app` and tab-completing to the `appliance-manager` command.
 
