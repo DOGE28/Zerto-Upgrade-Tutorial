@@ -4,7 +4,7 @@ This tutorial will walk you through the necessary steps to upgrade your current 
 
 ValorC3 requires your current Windows ZVM version to be 9.7 U4 (any patch) in order to follow along with this tutorial. If for some reason your site says you're on a different version, please upgrade your Windows ZVM to this point before proceeding.
 
-For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times at a later point in time to reach the latest version.
+For the migration process specifically we will be going from 9.7 U4 to 10.0 U2. Once all of our clients have reached this point, we will ask you to update your ZVM several more times to reach the latest version.
 
 > [!IMPORTANT]
 > Before proceeding, please consult with the [Zerto Compatibility Matrix](https://www.zerto.com/myzerto/support/interoperability-matrix/) to ensure that your environment is compatible with the upgrade process and all VRAs state they are on the latest version. If you are viewing this to upgrade your existing Linux ZVM, please go to the [Upgrading The ZVM](#upgrading-the-zvm) section.
