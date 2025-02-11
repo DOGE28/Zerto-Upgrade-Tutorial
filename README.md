@@ -122,7 +122,7 @@ Your Linux ZVM appliance is now ready for migration.
 > Before proceeding, please verify you have completed all of the [Pre-Migration](#pre-migration) steps to ensure the migration goes smoothly!
 
 >[!IMPORTANT]
-> This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of failure, but a snapshot is much easier and more convenient. You will also be required to redeploy the Linux ZVM in the event of a failed migration. A snapshot to the state just before migration means you don't have to redeploy!
+> This is where you will want to take snapshots of both the Windows and Linux ZVMs. ***We **HIGHLY RECOMMEND** taking snapshots!*** There is a process to restore the Windows ZVM in the event of an unrecoverable failure, but a snapshot is much easier and more convenient. You will also be required to redeploy the Linux ZVM in the event of a failed migration. A snapshot to the state just before migration means you don't have to redeploy!
 
 You will want to download the [Zerto Migration Tool](https://f002.backblazeb2.com/file/TDC-ShareFiles/Zerto_Software/ZvmlMigrationTool_585.zip) onto the Windows ZVM.
 
