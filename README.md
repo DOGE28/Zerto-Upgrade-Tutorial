@@ -150,7 +150,7 @@ Return to the *Linux* ZVM web page, and verify that the migration was successful
 
 Once the migration tool has verified that everything is done, you may power off the old Windows ZVM and begin using the Linux version. It is recommended that you keep your Windows VM powered off for a few days/a week to verify that everything on the Linux side is working as intended. Do not have both the ZVMs powered on at the same time as you may run into replication issues.
 
-If you run into a "ZORG" related VRA issue, please see the Troubleshooting section to resolve the issue. It is caused by a bug in the migration tool, but will not affect your replication.
+If you run into a "ZORG" related VRA issue, please see the [Troubleshooting](#troubleshooting) section to resolve it. It is caused by a bug in the migration tool, but will not affect your replication.
 
 ## Authentication
 
