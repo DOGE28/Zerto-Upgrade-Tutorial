@@ -282,7 +282,7 @@ Once these steps have been completed, you will want to test your credentials aga
 
 Zerto only allows upgrading up to two major versions away from your current version. For example, if you are on 10.0 U2 and want to reach 10.0 U5, you will first need to upgrade to either 10.0 U3 or U4 before you can upgrade to U5. 
 
-This point is incredibly important, as this two-away versioning also applies to compatibility. If ValorC3 is on 10.0 U2 and you upgrade to 10.0 U5 (three major versions apart), replication will break and you will need to roll back your whole environment. The ZVM will typically prevent you from upgrading to an incompatible version, but in the case it doesn't it's important to know this information.
+This point is incredibly important, as this two-away versioning also applies to compatibility. If ValorC3 is on 10.0 U2 and you upgrade to 10.0 U5 (three major versions apart, patches are not considered major), replication will break and you will need to roll back your whole environment. The ZVM will typically prevent you from upgrading to an incompatible version, but in the case it doesn't it's important to know this information.
 
 With ValorC3's blessing, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
 
