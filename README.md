@@ -286,13 +286,17 @@ This point is incredibly important, as this two-away versioning also applies to 
 
 With ValorC3's blessing, you may go to https<span>://ZVM-IP</span>/management and log in with your admin account's credentials. From here you will go to the "Appliance Upgrade" tab where it will likely tell you that you have a new version available.
 
-You will see an upgrade button in the top right, click on it and you will see a list of available versions. Select the version that ValorC3 has asked you to upgrade to. You will want to ensure there is a Zerto "Z" next to the version you choose, then click "Upgrade". 
+You will see an upgrade button in the top right, click on it and you will see a list of available versions. Select the version that ValorC3 has asked you to upgrade to. You will want to ensure there is a Zerto "Z" next to the version you choose, then click "Upgrade". (The below picture shows the options grayed out, but yours will not be)
 
 ![alt text](image-8.png)
 
 The ZVM will then begin the upgrade process. It will log you out from the management console multiple times, log back in to watch the progress of the upgrade.
 
+This process generally takes about an hour, maybe less depending on how many VPGs and hosts you have. If something goes wrong and your ZVM doesn't let you update, please check the [Troubleshooting](#troubleshooting) section for your error before reaching out to ValorC3.
+
 Once the upgrade is finished, you will want to double check that your VRAs have all been updated or are currently updating. If they aren't, please start that process manually.
+
+**Please do not upgrade beyond the version ValorC3 has asked for!**
 
 
 ### ZVM Health Check
